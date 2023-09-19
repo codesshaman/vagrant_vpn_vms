@@ -24,8 +24,9 @@ help:
 	@echo -e "$(WARN_COLOR)- make build			: Building configuration"
 	@echo -e "$(WARN_COLOR)- make connect			: Connect to VM with ssh"
 	@echo -e "$(WARN_COLOR)- make down			: Stopping configuration"
-	@echo -e "$(WARN_COLOR)- make ps			: View configuration"
 	@echo -e "$(WARN_COLOR)- make path			: Change path to vagrantboxes"
+	@echo -e "$(WARN_COLOR)- make ps			: View configuration"
+	@echo -e "$(WARN_COLOR)- make push			: Push changes to git"
 	@echo -e "$(WARN_COLOR)- make re			: Restart configuration"
 	@echo -e "$(WARN_COLOR)- make clean			: Destroy configuration"
 	@echo -e "$(WARN_COLOR)- make  fclean			: Forced destroy all$(NO_COLOR)"
@@ -37,7 +38,7 @@ build:
 
 connect:
 	@printf "$(OK_COLOR)==== Connecting to virtual machine ${name}... ====$(NO_COLOR)\n"
-	@ssh vagrant@192.168.56.110
+	@ssh vagrant@192.168.56.111
 
 con1:
 	@printf "$(OK_COLOR)==== Connecting to virtual machine ${name}... ====$(NO_COLOR)\n"
@@ -64,6 +65,9 @@ path:
 	@export VAGRANT_HOME=".vagrantboxes"
 	@mkdir .vagrantboxes
 	@printf "$(OK_COLOR)==== Pas has been changing ====$(NO_COLOR)\n"
+
+push:
+	@bash push.sh
 
 clean: down
 	@printf "$(ERROR_COLOR)==== Destroy configuration ${name}... ====$(NO_COLOR)\n"
